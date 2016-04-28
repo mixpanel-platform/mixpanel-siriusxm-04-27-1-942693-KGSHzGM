@@ -152,7 +152,7 @@
       var thisMonth = new Date().toISOString().substring(0,7)
       function main() {
         return People(
-        ).groupBy(["properties.$initial_referring_domain"], mixpanel.reducer.sum(
+        ).groupBy(["properties.$initial_referrer"], mixpanel.reducer.sum(
           function(user){
            var total = 0 
             _.each(user.properties.$transactions, function(t){
@@ -580,21 +580,21 @@
         })
 
         //query for pagevies
-        MP.api.segment('App Open', '$initial_referring_domain', {from: moment().subtract(1, 'month'), interval: 1, limit: 100}).done(function(pageViews) {
+        MP.api.segment('App Open', '$initial_referrer', {from: moment().subtract(1, 'month'), interval: 1, limit: 100}).done(function(pageViews) {
           //sum last 30 days count
           pageViewResutls = pageViews.sum().values()
    
             //query for search
-          MP.api.segment('Trail Completed', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month',limit: 100}).done(function(search) {
+          MP.api.segment('Trail Completed', '$initial_referrer', {from: moment().subtract(1, 'month'), unit: 'month',limit: 100}).done(function(search) {
             //sum last 30 days count
             searchResults = search.sum().values()
           
             //query for added to cart
-            MP.api.segment('Sign Up', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(addToCart) {
+            MP.api.segment('Sign Up', '$initial_referrer', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(addToCart) {
               //sum last 30 days count
               addToCartResults = addToCart.sum().values()
               //query for checkout
-              MP.api.segment('Purchase Complete', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(checkoutResults) {
+              MP.api.segment('Purchase Complete', '$initial_referrer', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(checkoutResults) {
               //sum last 30 days count
               checkout = checkoutResults.sum().values()
              
