@@ -580,21 +580,21 @@
         })
 
         //query for pagevies
-        MP.api.segment('Pageviews', '$initial_referring_domain', {from: moment().subtract(1, 'month'), interval: 1, limit: 100}).done(function(pageViews) {
+        MP.api.segment('App Open', '$initial_referring_domain', {from: moment().subtract(1, 'month'), interval: 1, limit: 100}).done(function(pageViews) {
           //sum last 30 days count
           pageViewResutls = pageViews.sum().values()
    
             //query for search
-          MP.api.segment('Search', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month',limit: 100}).done(function(search) {
+          MP.api.segment('Trail Completed', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month',limit: 100}).done(function(search) {
             //sum last 30 days count
             searchResults = search.sum().values()
           
             //query for added to cart
-            MP.api.segment('Add to cart', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(addToCart) {
+            MP.api.segment('Sign Up', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(addToCart) {
               //sum last 30 days count
               addToCartResults = addToCart.sum().values()
               //query for checkout
-              MP.api.segment('Checkout', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(checkoutResults) {
+              MP.api.segment('Purchase Complete', '$initial_referring_domain', {from: moment().subtract(1, 'month'), unit: 'month', limit: 100}).done(function(checkoutResults) {
               //sum last 30 days count
               checkout = checkoutResults.sum().values()
              
@@ -627,10 +627,10 @@
                         data: data,
                         columns:[
                           {title: "Source"},
-                          {title: "Page Views"},
-                          {title: "Search"},
-                          {title: "Add to Cart"},
-                          {title: "Check out"},
+                          {title: "App Open"},
+                          {title: "Trail Completed"},
+                          {title: "Sign Up"},
+                          {title: "Purchase Complete"},
                           {title: "Revenue"},
                           {title: "Average Order"}
                         ],
